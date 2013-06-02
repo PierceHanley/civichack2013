@@ -1,14 +1,13 @@
-package org.ph0.civichack;
+package org.ph0.civichack.usda;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.ph0.civichack.usda.MarketDetails;
 
 @XmlRootElement
 public class FarmersMarket {
 	private String id;
 
-//	@XmlElement(name = "marketname")
 	private String marketName;
 
 	private MarketDetails marketDetails;
@@ -21,6 +20,7 @@ public class FarmersMarket {
 		this.id = id;
 	}
 
+	@XmlElement(name = "marketname")
 	public String getMarketName() {
 		return marketName;
 	}

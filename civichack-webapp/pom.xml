@@ -4,7 +4,6 @@
   <groupId>org.ph0</groupId>
   <artifactId>civichack-webapp</artifactId>
   <packaging>war</packaging>
-  <version>0.0.1-SNAPSHOT</version>
   <name>civichack-webapp Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
@@ -34,4 +33,10 @@
   <build>
     <finalName>ROOT</finalName>
   </build>
+  <parent>
+  	<groupId>org.ph0.civichack</groupId>
+  	<artifactId>civichack-parent</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  	<relativePath>../civichack-parent</relativePath>
+  </parent>
 </project>

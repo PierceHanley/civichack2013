@@ -4,12 +4,16 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
 import org.apache.commons.lang3.StringUtils;
+import org.ph0.civichack.usda.FarmersMarket;
 import org.ph0.civichack.usda.MarketDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,6 +77,7 @@ public class FarmersMarketService {
 	
 	@GET
 	@Path("/geo")
+    @Produces("application/json")
 	public List<FarmersMarket> findMarketsByGeoCoordinate(@QueryParam("lat") String lat, @QueryParam("lon") String lon) throws Exception {
 		GeoCoordinate coord = new GeoCoordinate();
 		coord.setLat(lat);
@@ -89,6 +94,7 @@ public class FarmersMarketService {
 
 	@GET
 	@Path("/zip")
+    @Produces("application/json")
 	public List<FarmersMarket> findMarketsByZip(@QueryParam("zip") String zip) throws Exception {
 		String url = "http://search.ams.usda.gov/FarmersMarkets/v1/data.svc/zipSearch?zip="
 				+ zip;
@@ -117,6 +123,16 @@ public class FarmersMarketService {
 		int i=0;
 		for (FarmersMarket market : markets) {
 			i++;
+			String name = market.getMarketName();
+			if (!StringUtils.isEmpty(name)) {
+				Matcher m = Pattern.compile("^([0-9](\\.[0-9]+)?)\\s+(.*)$").matcher(name);
+				if (m.matches()) {
+					String distance = m.group(1);
+					String mname = m.group(3);
+					log.info("dist: {}; name: {}", distance, mname);
+					market.setMarketName(mname);
+				}
+			}
 			fillMarketDetails(market);
 //			log.info("Market {}: {}", i, mapper.writerWithDefaultPrettyPrinter().writeValueAsString(market));
 		}
