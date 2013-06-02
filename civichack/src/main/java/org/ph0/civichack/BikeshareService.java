@@ -55,7 +55,7 @@ public class BikeshareService {
 		sorted.addAll(stations);
 		Collections.sort(sorted, new StationComparator(lat,lon));
 		BikeshareStations ret = new BikeshareStations();
-		ret.setStations(sorted);
+		ret.setStations(sorted.subList(0, 5));
 		return ret;
 	}
 

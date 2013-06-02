@@ -82,7 +82,8 @@ public class FarmersMarketService {
 		GeoCoordinate coord = new GeoCoordinate();
 		coord.setLat(lat);
 		coord.setLon(lon);
-		return findMarketsByGeoCoordinate(coord);
+		
+		return findMarketsByGeoCoordinate(coord).subList(0, 5);
 	}
 	
 	public List<FarmersMarket> findMarketsByGeoCoordinate(GeoCoordinate coord) throws Exception {

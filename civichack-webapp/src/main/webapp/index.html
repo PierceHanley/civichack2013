@@ -30,10 +30,11 @@
       var lon = -77.0453;
 		console.log("abc");
       var yourStartLatLng = new google.maps.LatLng(lat, lon);
-      $('#map_canvas').gmap({'center': yourStartLatLng});
-      //.bind("init", function() {
+      $('#map_canvas').gmap({'center': yourStartLatLng})
+      .bind("init", function() {
           stations(lat, lon);
-      //});
+    	  markets(lat, lon);
+      });
     });
 
 
