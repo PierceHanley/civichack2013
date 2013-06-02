@@ -2,8 +2,7 @@ package org.ph0.civichack;
 
 import java.util.List;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 import org.ph0.civichack.usda.FarmersMarket;
 
