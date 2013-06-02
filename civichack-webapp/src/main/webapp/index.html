@@ -28,7 +28,6 @@
       // Also works with: var yourStartLatLng = '59.3426606750, 18.0736160278';
       var lat = 38.9065;
       var lon = -77.0453;
-		console.log("abc");
       var yourStartLatLng = new google.maps.LatLng(lat, lon);
       $('#map_canvas').gmap({'center': yourStartLatLng})
       .bind("init", function() {
@@ -54,11 +53,11 @@
 <div id="gps_map" data-role="page">
 
   <div data-theme="a" data-role="header">
-    <h3 id="header">Farmers Market</h3>
+    <h3 id="header">City Seed</h3>
   </div>
   <div data-role="content">
     <div class="ui-bar-c ui-corner-all ui-shadow" style="padding:1em;">
-      <div id="map_canvas" style="height:300px;"></div>
+      <div id="map_canvas" style="height:500px;"></div>
     </div>
   </div>
 
