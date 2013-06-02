@@ -3,7 +3,6 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ph0</groupId>
 	<artifactId>civichack</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>hackathon</name>
 	<dependencies>
  
@@ -86,4 +85,10 @@
 			<version>2.2.1</version>
 		</dependency>
 	</dependencies>
+	<parent>
+		<groupId>org.ph0.civichack</groupId>
+		<artifactId>civichack-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../civichack-parent</relativePath>
+	</parent>
 </project>
