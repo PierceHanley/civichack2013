@@ -1,5 +1,6 @@
 package org.ph0.civichack;
 
+import java.net.URI;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -26,6 +27,9 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 public class BikeshareService {
 	private static final Logger log = LoggerFactory
 			.getLogger(BikeshareService.class);
+	
+	private static final URI BIKESHARE_STATIONS_XML_URI = URI.create("http://www.capitalbikeshare.com/data/stations/bikeStations.xml");
+	
 	private Client client;
 	private ObjectMapper mapper;
 	private GeoService geo;
@@ -39,9 +43,24 @@ public class BikeshareService {
 		mapper = new ObjectMapper();
 		mapper.registerModule(new JaxbAnnotationModule());
 		geo = new GeoService();
-		stations = JAXB.unmarshal(
-				BikeshareService.class.getResource("/bikeStations.xml"),
-				BikeshareStations.class).getStations();
+		
+		BikeshareStations bikeshareStations = null;
+		try {
+			bikeshareStations = JAXB.unmarshal(
+					BIKESHARE_STATIONS_XML_URI,
+					BikeshareStations.class);
+		}
+		catch (RuntimeException re) {
+			log.error("An error occured while retrieving up-to-date Bikeshare station XML.", re);
+		}
+		
+		if (bikeshareStations == null) {
+			bikeshareStations = JAXB.unmarshal(
+					BikeshareService.class.getResource("/bikeStations.xml"),
+					BikeshareStations.class);
+		}
+		
+		stations = bikeshareStations.getStations();
 	}
 
 	@GET

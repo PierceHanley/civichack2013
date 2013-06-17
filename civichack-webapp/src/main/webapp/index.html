@@ -28,11 +28,21 @@
       // Also works with: var yourStartLatLng = '59.3426606750, 18.0736160278';
       var lat = 38.9065;
       var lon = -77.0453;
-      var yourStartLatLng = new google.maps.LatLng(lat, lon);
-      var m = $('#map_canvas').gmap({'center': yourStartLatLng});
+      var startLatLng = new google.maps.LatLng(lat, lon);
+      var m = $('#map_canvas').gmap({'center': startLatLng});
       m.bind("init", function() {
+          if (navigator.geolocation) {
+        	  navigator.geolocation.getCurrentPosition(
+        			  function(location) {
+        				  startLatLng = new google.maps.LatLng(
+        						  location.coords.latitude, location.coords.longitude)
+        				  $('#map_canvas').gmap({'center': startLatLng});
+        		    	  markets(lat, lon);
+        			  },
+        			  function(error) { console.log(error); }
+          	  );
+          }
           //stations(lat, lon);
-    	  markets(lat, lon);
       });
       console.log(m);
       m.addEventListener("center_changed", function() {
@@ -44,6 +54,7 @@
     	  $("#map_canvas").clear("markers");
     	  markets(lat2,lon2);
       });
+      
     });
 
 

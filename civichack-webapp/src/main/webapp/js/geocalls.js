@@ -9,7 +9,7 @@ function stations(lat, lon) {
 			console.log("object: " ,o);
 			var curstation = $('#map_canvas').gmap('addMarker', {
 				'position' : new google.maps.LatLng(o.lat, o.lon),
-				'icon': "http://www.google.com/intl/en_us/mapfiles/ms/micons/green-dot.png",
+				'icon': "http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png",
 				'bounds' : true
 			}).click(function() {
 				$('#map_canvas').gmap('openInfoWindow', {
