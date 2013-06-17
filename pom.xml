@@ -8,14 +8,13 @@
   <packaging>pom</packaging>
 
   <name>civichack-parent</name>
-  <url>http://maven.apache.org</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <modules>
-  	<module>../civichack</module>
-  	<module>../civichack-webapp</module>
+  	<module>civichack-base</module>
+  	<module>civichack-webapp</module>
   </modules>
 	<build>
 		<plugins>

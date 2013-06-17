@@ -29,10 +29,20 @@
       var lat = 38.9065;
       var lon = -77.0453;
       var yourStartLatLng = new google.maps.LatLng(lat, lon);
-      $('#map_canvas').gmap({'center': yourStartLatLng})
-      .bind("init", function() {
-          stations(lat, lon);
+      var m = $('#map_canvas').gmap({'center': yourStartLatLng});
+      m.bind("init", function() {
+          //stations(lat, lon);
     	  markets(lat, lon);
+      });
+      console.log(m);
+      m.addEventListener("center_changed", function() {
+    	  console.log("test");
+    	  var ll = $("#map_canvas").get("center");
+    	  console.log(ll);
+    	  var lat2 = ll.lat();
+    	  var lon2 = ll.lon();
+    	  $("#map_canvas").clear("markers");
+    	  markets(lat2,lon2);
       });
     });
 
